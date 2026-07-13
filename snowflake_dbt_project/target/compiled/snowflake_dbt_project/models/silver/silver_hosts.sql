@@ -1,0 +1,19 @@
+
+
+select
+    host_id,
+     trim(upper(HOST_NAME))  as host_name,
+    host_since as host_since,
+    is_superhost as is_superhost,
+    response_rate as response_rate,
+    case
+        when response_rate > 95
+        then 'VERY GOOD'
+        when response_rate > 80
+        then 'GOOD'
+        when response_rate > 60
+        then 'FAIR'
+        else 'POOR'
+    end as response_rate_quality,
+    created_at as created_at
+from AIRBNB.bronze.bronze_hosts
